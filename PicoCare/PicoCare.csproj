@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.0.5-ci94" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.4.0-ci94" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="107.3.1-alpha.0.14" />
+    <PackageReference Include="Syncfusion.DocIO.Wpf" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.DocToPDFConverter.Wpf" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.Pdf.Wpf" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.SfGrid.WPF" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="19.4.0.56" />
+  </ItemGroup>
+
+</Project>

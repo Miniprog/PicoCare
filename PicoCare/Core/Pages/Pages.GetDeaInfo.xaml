@@ -1,0 +1,50 @@
+﻿<Window x:Class="PicoCRM.Core.Pages.GetDealInfo"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+
+        xmlns:local="clr-namespace:PicoCRM"
+        FlowDirection="RightToLeft"
+            
+
+        mc:Ignorable="d"
+        Title="Pages" Height="650" Width="500">
+    <Grid>
+        <StackPanel x:Name="FormPLaceHolder" >
+            <TextBox x:Name="cDealId" FontFamily="B Yekan" Margin="20,20,20,20" Height="30" materialDesign:HintAssist.Hint="شناسه سفارش" />
+            <Button x:Name="GetDealBtn"  Content="بررسی سفارش" FontFamily="B Yekan" Height="39" Width="300" Click="GetDealBtn_Click"/>
+
+            <TextBox x:Name="cDealTitle" FontFamily="B Yekan" Margin="20,20,20,20" Height="30" materialDesign:HintAssist.Hint="عنوان سفارش" />
+            <TextBox x:Name="cDealTotalAmont" FontFamily="B Yekan" Margin="10,10,10,10" Height="30" materialDesign:HintAssist.Hint="مبلغ دریفاتی از مشتری" />
+            <TextBox x:Name="cDealIPG" FontFamily="B Yekan" Margin="10,10,10,10" Height="30" materialDesign:HintAssist.Hint="مبلغ خریدآنلاین  " />
+            <TextBox x:Name="cServicePrice" FontFamily="B Yekan" Margin="10,10,10,10" Height="30" materialDesign:HintAssist.Hint="مبلغ خدمات"  />
+            <TextBox x:Name="cDealPhone" FontFamily="B Yekan" Margin="10,10,10,10" Height="30" materialDesign:HintAssist.Hint="تلفن همراه" />
+            <TextBox x:Name="cDealFullName" FontFamily="B Yekan" Margin="10,10,10,10" Height="30" materialDesign:HintAssist.Hint="نام و نام خانوادگی" />
+            <TextBox x:Name="cDealAbout" Text="Text" VerticalScrollBarVisibility="Auto" Height="100" />
+            <ComboBox x:Name="DealStatus" Width="266" Margin="10,10,10,10" >
+
+                <ComboBoxItem x:Name="Deal_appointmentscheduled">در حال بررسی</ComboBoxItem>
+                <ComboBoxItem x:Name="Deal_WaitForInitialPayment" >در انتظار پرداخت اولیه</ComboBoxItem>
+
+                <ComboBoxItem x:Name="Deal_InProgress" >در انتظار انجام</ComboBoxItem>
+
+                <ComboBoxItem x:Name="Deal_WaitingForCashOut" >در انتظار تسویه</ComboBoxItem>
+
+                <ComboBoxItem x:Name="Deal_Won"  >نهایی شده</ComboBoxItem>
+
+                <ComboBoxItem x:Name="Deal_Canceled" >کنسل شده</ComboBoxItem>
+            </ComboBox>
+
+            <Button x:Name="UpDateDealBtn"  Content="بروزرسانی سفارش" FontFamily="B Yekan" Height="39" Width="300" Click="UpDateDealBtn_Click  "/>
+
+            <Label x:Name="LblStatus"/>
+        </StackPanel>
+    </Grid>
+
+</Window>
