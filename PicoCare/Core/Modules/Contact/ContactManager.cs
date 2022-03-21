@@ -6,87 +6,191 @@ namespace PicoCRM.Core.Modules.Contact
 
     public class ContactManager
     {
-       
+
         public class CreateContact
 
-         {
+        {
 
 
-             public async Task<string> Create(string FullName , string  PhoneNummber , string NatCode )
-             {
-                 try
-                 {
+            public async Task<string> Create(string FullName, string PhoneNummber, string NatCode)
+            {
+                try
+                {
 
-                     var options = new RestClientOptions("https://api.hubapi.com/crm/v3/objects/contacts")
-                     {
-                         ThrowOnAnyError = true,
-                         Timeout = 3000,
+                    var options = new RestClientOptions("https://api.hubapi.com/crm/v3/objects/contacts")
+                    {
+                        ThrowOnAnyError = true,
+                        Timeout = 3000,
 
 
-                     };
+                    };
 
-                     var ContactData = new ActionCreate.Request
-                     {
-                         properties = new ActionCreate.Request.Properties
-                         {
-                             firstname = FullName,
-                             email = NatCode + "@PicoCRM.ir",
-                             phone = PhoneNummber,
+                    var ContactData = new ActionCreate.Request
+                    {
+                        properties = new ActionCreate.Request.Properties
+                        {
+                            firstname = FullName,
+                            email = NatCode + "@PicoCRM.ir",
+                            phone = PhoneNummber,
+                            fax = "0",
+                        }
+                    };
 
-                         }
-                     };
+                    string ContactDataJson = JsonConvert.SerializeObject(ContactData);
 
-                     string ContactDataJson = JsonConvert.SerializeObject(ContactData);
+                    var client = new RestClient(options);
 
-                     var client = new RestClient(options);
+                    var request = new RestRequest()
 
-                     var request = new RestRequest()
+                        .AddHeader("Content-Type", "application/json")
 
-                         .AddHeader("Content-Type", "application/json")
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
 
-                         .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
+                        .AddJsonBody(ContactData);
 
-                         .AddJsonBody(ContactData);
+                    var response = await client.PostAsync<ActionCreate.Response>(request);
 
-                     var response = await client.PostAsync<ActionCreate.Response>(request);
-
-                     return response.properties.hs_all_contact_vids.ToString();
-                 }
-                 catch (Exception ex)
-                 {
-                     if (ex.Message.Contains("Conflict"))
-                     {
+                    return response.properties.hs_all_contact_vids.ToString();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message.Contains("Conflict"))
+                    {
                         GetContact getContact = new GetContact();
 
                         var result = await getContact.GetId(PhoneNummber);
                         return result;
 
-                     }
-                     else
-                     {
-                         return "0";
-                     }
-                    
-                 }
-             }
+                    }
+                    else
+                    {
+                        return "0";
+                    }
+
+                }
+            }
 
 
 
 
-         }
+        }
 
-         public class DeleteContact
-         {
+        public class DeleteContact
+        {
             public bool GDPRDelete(string contactid)
             {
                 return true;
             }
-         }
+        }
 
-         public class UpdateContact
+        public object ContactData {get;set;}
+        
+        public class UpdateContact
 
          {
-             
+             public async Task<bool> UpdateWallet(string contactid , long amount ,bool IsAddBalance)
+          
+            
+            {
+                GetContact getContact = new GetContact();
+
+                long CurrentBalance =  await   getContact.GetWalletBalance(contactid);
+              
+                
+                try
+                {
+                    var options = new RestClientOptions($"https://api.hubapi.com/crm/v3/objects/contacts/{contactid}")
+                    {
+                        ThrowOnAnyError = true,
+                        Timeout = 3000,
+
+
+                    };
+
+                    var client = new RestClient(options);
+
+                    if (IsAddBalance)
+                    {
+                        var ContactData = new ActionCreate.Request
+                        {
+                            properties = new ActionCreate.Request.Properties
+                            {
+                               fax = (CurrentBalance + amount).ToString()
+
+                            }
+                        };
+                        var request = new RestRequest()
+
+                        .AddHeader("Content-Type", "application/json")
+                        .AddQueryParameter("archived", "false")
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
+
+                        .AddQueryParameter("properties", "fax")
+
+                        .AddJsonBody(ContactData)
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8");
+                        var response = await client.PatchAsync<ActionGetContactInfo.ContactData>(request);
+                       
+                        if (long.Parse(response.properties.fax) == CurrentBalance)
+                        {
+                            
+                            return false;
+                        }
+                        else
+                        {
+                            
+                            return true;
+                        }
+
+                    }
+                    else
+                    {
+                        var ContactData = new ActionCreate.Request
+                        {
+                            properties = new ActionCreate.Request.Properties
+                            {
+                                fax = (CurrentBalance - amount).ToString()
+
+                            }
+                        };
+                        var request = new RestRequest()
+
+                        .AddHeader("Content-Type", "application/json")
+                        .AddQueryParameter("archived", "false")
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
+
+                        .AddQueryParameter("properties", "fax")
+
+                        .AddJsonBody(ContactData)
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8");
+                        var response = await client.PatchAsync<ActionGetContactInfo.ContactData>(request);
+                       
+                        if (long.Parse(response.properties.fax) == CurrentBalance)
+                        {
+                           
+                            return false;
+                        }
+                        else
+                        {
+                           
+                            return true;
+                        }
+
+                    }
+
+
+                   
+                   
+                    
+                   
+                 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+            }
          }
 
          public class GetContact
@@ -296,9 +400,49 @@ namespace PicoCRM.Core.Modules.Contact
                 var response = await client.GetAsync<ActionGetContactInfo.ContactData>(request);
                 return response;
             }
+
+            public async Task<long> GetWalletBalance(string ContactId)
+            {
+                var options = new RestClientOptions($"https://api.hubapi.com/crm/v3/objects/contacts/{ContactId}")
+                {
+                    ThrowOnAnyError = true,
+                    Timeout = 3000,
+
+
+                };
+
+                var client = new RestClient(options);
+
+                var request = new RestRequest()
+
+                          .AddHeader("Content-Type", "application/json")
+                          .AddQueryParameter("archived", "false")
+                          .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
+
+                          .AddQueryParameter("properties", "fax")
+
+
+                          .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8");
+
+                var response = await client.GetAsync<ActionGetContactInfo.ContactData>(request);
+                string? wallet = response?.properties.fax;
+
+                if (wallet == null || wallet == "0")
+                {
+                    return 0;
+                }
+                else
+                {
+                    MessageBox.Show("1:" +wallet);
+                    return long.Parse(wallet);
+                }
+
+            }
+
+
         }
 
-          
+
         public class AssociateContact
             
         {

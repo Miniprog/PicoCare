@@ -21,11 +21,17 @@ namespace PicoCare.Core.Views
         private async void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             ContactManager.CreateContact contactManager = new ContactManager.CreateContact();
+           
             ContactManager.AssociateContact associateContact = new ContactManager.AssociateContact();
+           
             ContactManager.GetContact getContact = new ContactManager.GetContact();
+           
             DealManager dealManager = new DealManager();
+           
             PicoCRM.Core.Modules.SMS.Handler.Send Sms = new PicoCRM.Core.Modules.SMS.Handler.Send();
+          
 
+            ContactManager.UpdateContact updateContact = new ContactManager.UpdateContact();
          
               
             string contactid =   await contactManager.Create(cName.Text, cPhoneNumber.Text, cNatCode.Text);
@@ -39,17 +45,20 @@ namespace PicoCare.Core.Views
             
             associateContact.ToDeal(DayID, DealId);
 
-              
+
+         
+            bool status =   await  updateContact.UpdateWallet(contactid,long.Parse(cDealPrice.Text) /100*15 , true);
+          
+            MessageBox.Show(status.ToString());
+            
             string DayRevenue = await getContact.GetRevenue(ToPersianDate(DateTime.Now , false));
 
-            MessageBox.Show(DayRevenue);
-            MessageBox.Show(contactid);
-            MessageBox.Show(DayID);
+        
 
-            await Sms.SendReportToAdmin(cName.Text, "09109740017", cDealPrice.Text, cDealTitle.Text,DayRevenue, "", DealId);
+          /*  await Sms.SendReportToAdmin(cName.Text, "09109740017", cDealPrice.Text, cDealTitle.Text,DayRevenue, "", DealId);
                          
                 
-            await Sms.SendReportToAdmin(cName.Text, "09150089472", cDealPrice.Text, cDealTitle.Text, DayRevenue, "", DealId);
+            await Sms.SendReportToAdmin(cName.Text, "09150089472", cDealPrice.Text, cDealTitle.Text, DayRevenue, "", DealId);*/
 
         }
         public string ToPersianDate(DateTime thisDate , bool Timeincluded)

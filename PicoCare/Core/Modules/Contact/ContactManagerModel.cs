@@ -27,8 +27,9 @@ namespace PicoCRM.Core.Modules.Contact.Models
                     public string? firstname { get; set; }
                     public string? lastname { get; set; }
                     public string? phone { get; set; }
-                    public string? website { get; set; }
-                   
+                    public string? fax { get; set; }
+                  
+                  
 
 
                 }
@@ -57,6 +58,7 @@ namespace PicoCRM.Core.Modules.Contact.Models
                     public string? hs_all_contact_vids { get; set; }
                     public string? hs_is_contact { get; set; }
                     public string? total_revenue { get; set; }
+                    public string? fax { get; set; }
                 }
 
                 public class Error
@@ -227,8 +229,11 @@ namespace PicoCRM.Core.Modules.Contact.Models
                 public string hs_object_id { get; set; }
                 public DateTime lastmodifieddate { get; set; }
            
+                public string website { get; set; }
                 public string total_revenue { get; set; }
                 public string phone { get; set; }
+                public string? fax { get; set; }
+
             }
 
         }
