@@ -55,10 +55,10 @@ namespace PicoCare.Core.Views
 
         
 
-          /*  await Sms.SendReportToAdmin(cName.Text, "09109740017", cDealPrice.Text, cDealTitle.Text,DayRevenue, "", DealId);
+           await Sms.SendReportToAdmin(cName.Text, "09109740017", cDealPrice.Text, cDealTitle.Text,DayRevenue, "", DealId);
                          
                 
-            await Sms.SendReportToAdmin(cName.Text, "09150089472", cDealPrice.Text, cDealTitle.Text, DayRevenue, "", DealId);*/
+            await Sms.SendReportToAdmin(cName.Text, "09150089472", cDealPrice.Text, cDealTitle.Text, DayRevenue, "", DealId);
 
         }
         public string ToPersianDate(DateTime thisDate , bool Timeincluded)

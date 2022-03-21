@@ -11,7 +11,9 @@
 
        
     mc:Ignorable="d"
-        WindowStyle="None"
+        WindowStyle="ToolWindow"
+   
+    ResizeMode="NoResize"
     
         Title="MainWindow" Height="500" Width="700" >
     <Grid >
