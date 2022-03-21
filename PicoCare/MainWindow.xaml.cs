@@ -1,20 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using PicoCRM.Core.Modules.Contact;
-using PicoCRM.Core.Modules.Deal;
+﻿
 
 namespace PicoCare
 {
@@ -26,38 +10,42 @@ namespace PicoCare
         public MainWindow()
         {
             InitializeComponent();
-            
-        }
-
-        private async void TabDeals_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DealManager dealManager = new DealManager();
-
-            DataTable dts = new DataTable();
-
-            dts = await dealManager.GetDealList();
-            MessageBox.Show(dts.Rows.Count.ToString());
-
-            dtDeals.DataContext = dts.DefaultView;
-        }
-
-        private void TabItem_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzU3NzI5QDMxMzkyZTM0MmUzMGFiUDZTT0ZVMkY2QXlhZURyWHcyWW8vUVVxWE1MZTRMK1hoQ1A3YmVYY1k9");
+            SfSkinManager.SetTheme(this, new Theme("FluentDark"));
+            SfSkinManager.ApplyStylesOnApplication = true;
+            FluentDarkThemeSettings themeSettings = new FluentDarkThemeSettings();
+            themeSettings.FontFamily = new FontFamily("B Yekan");
+            SfSkinManager.RegisterThemeSettings("FluentDark", themeSettings);
+            ViewQuickTransaction viewQuickTransaction = new ViewQuickTransaction();
+            NavDrawer.ContentView = viewQuickTransaction.PlaceHolder;
 
         }
 
-        private async void TabContacts_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void TabConfigurationSetting_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ContactManager.ListContact contactManager = new ContactManager.ListContact();
 
-            DataTable dts = new DataTable();
-            dts = await  contactManager.GetContactList();
-          
-            dts.Columns[1].ColumnName = "نام و نام خانادگی";
-            dts.Columns[2].ColumnName = "شماره تلفن همراه";
-            dts.Columns[3].ColumnName = "مجموع امتیازات";
-            dts.Columns[4].ColumnName = "تاریخ عضویت";
-            dtCustomers.DataContext = dts.DefaultView;
+            ViewConfigurationSetting viewConfigurationSettingPage = new ViewConfigurationSetting();
+            NavDrawer.ContentView = viewConfigurationSettingPage;
+
+
+        }
+
+     
+
+        private void TabContacts_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ViewListContacts viewListContacts = new ViewListContacts();
+            NavDrawer.ContentView = viewListContacts.MainView;
+
+        }
+
+        private void TabDashboard_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ViewQuickTransaction viewQuickTransaction = new ViewQuickTransaction();
+
+            NavDrawer.ContentView = viewQuickTransaction.PlaceHolder;
+              
+              
         }
     }
 }

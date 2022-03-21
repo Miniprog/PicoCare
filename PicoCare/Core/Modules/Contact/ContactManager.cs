@@ -1,18 +1,6 @@
 ﻿
 
 
-
-using Newtonsoft.Json;
-using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows;
-using static PicoCRM.Core.Modules.Contact.Models.Fields;
-
 namespace PicoCRM.Core.Modules.Contact
 {
 
@@ -24,7 +12,7 @@ namespace PicoCRM.Core.Modules.Contact
          {
 
 
-             public async Task<string> Create(string FullName , string  PhoneNummber )
+             public async Task<string> Create(string FullName , string  PhoneNummber , string NatCode )
              {
                  try
                  {
@@ -42,7 +30,7 @@ namespace PicoCRM.Core.Modules.Contact
                          properties = new ActionCreate.Request.Properties
                          {
                              firstname = FullName,
-                             email = PhoneNummber + "@PicoCRM.ir",
+                             email = NatCode + "@PicoCRM.ir",
                              phone = PhoneNummber,
 
                          }
@@ -56,7 +44,7 @@ namespace PicoCRM.Core.Modules.Contact
 
                          .AddHeader("Content-Type", "application/json")
 
-                         .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077")
+                         .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
 
                          .AddJsonBody(ContactData);
 
@@ -171,7 +159,7 @@ namespace PicoCRM.Core.Modules.Contact
 
                         .AddHeader("Content-Type", "application/json")
 
-                        .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077")
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
                         .AddBody(DesStr, "application/json");      
 
 
@@ -259,7 +247,7 @@ namespace PicoCRM.Core.Modules.Contact
 
                         .AddHeader("Content-Type", "application/json")
 
-                        .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077")
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
                         .AddBody(DesStr, "application/json");
 
 
@@ -268,7 +256,7 @@ namespace PicoCRM.Core.Modules.Contact
 
 
 
-                    return response.total.ToString() ;
+                    return response.results[0].properties.total_revenue ;
                 }
 
                 catch (Exception e)
@@ -294,7 +282,7 @@ namespace PicoCRM.Core.Modules.Contact
 
                            .AddHeader("Content-Type", "application/json")
                            .AddQueryParameter("archived", "false")
-                           .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077")
+                           .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
 
                            .AddQueryParameter("properties", "firstname")
 
@@ -303,7 +291,7 @@ namespace PicoCRM.Core.Modules.Contact
                            .AddQueryParameter("properties", "createdAt")
                            .AddQueryParameter("properties", "updatedAt")
 
-                           .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077");
+                           .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8");
 
                 var response = await client.GetAsync<ActionGetContactInfo.ContactData>(request);
                 return response;
@@ -337,7 +325,7 @@ namespace PicoCRM.Core.Modules.Contact
 
 
 
-                        .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077");
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8");
 
 
                     var responce = client.PutAsync(request);
@@ -376,7 +364,7 @@ namespace PicoCRM.Core.Modules.Contact
 
 
 
-                        .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077");
+                        .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8");
 
 
 
@@ -429,7 +417,7 @@ namespace PicoCRM.Core.Modules.Contact
 
                  dtColumn = new DataColumn();
                  dtColumn.DataType = typeof(Int32);
-                 dtColumn.ColumnName = "شناسه کاربری";
+                 dtColumn.ColumnName = "ID";
                  
                  dtColumn.ReadOnly = false;
                  dtColumn.Unique = true;
@@ -440,7 +428,7 @@ namespace PicoCRM.Core.Modules.Contact
                  dtColumn = new DataColumn();
                  dtColumn.DataType = typeof(String);
                  dtColumn.ColumnName = "Name";
-                 dtColumn.Caption = "نام و نام خانوادگی";
+        
                  dtColumn.AutoIncrement = false;
                  dtColumn.ReadOnly = false;
                  dtColumn.Unique = false;
@@ -469,14 +457,14 @@ namespace PicoCRM.Core.Modules.Contact
                 dtColumn = new DataColumn();
                 dtColumn.DataType = typeof(DateTime);
                 dtColumn.ColumnName = "CreateDate";
-                dtColumn.Caption = "مجموع تراکنش ها";
+       
                 dtColumn.ReadOnly = false;
                 dtColumn.Unique = false;
                 // Add column to the DataColumnCollection.
                 custTable.Columns.Add(dtColumn);
                 // Make id column the primary key column.
                 DataColumn[] PrimaryKeyColumns = new DataColumn[1];
-                 PrimaryKeyColumns[0] = custTable.Columns["id"];
+                 PrimaryKeyColumns[0] = custTable.Columns["ID"];
                  custTable.PrimaryKey = PrimaryKeyColumns;
 
 
@@ -505,15 +493,17 @@ namespace PicoCRM.Core.Modules.Contact
 
                          .AddHeader("accept", "application/json")
 
-                         .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077")
+                         .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
 
                          .AddQueryParameter("archived", "false")
 
                          .AddQueryParameter("properties", "phone")
+                         
+                         .AddQueryParameter("properties", "firstname")
 
                          .AddQueryParameter("properties", "total_revenue")
 
-                         .AddQueryParameter("limit", "100");
+                         .AddQueryParameter("limit", "10");
 
 
                      var response = await client.GetAsync<ListContacts.Response>(request);
@@ -528,10 +518,11 @@ namespace PicoCRM.Core.Modules.Contact
 
                      foreach (var info in response.results)
                      {
+                        MessageBox.Show(info.properties.firstname);
                          myDataRow = custTable.NewRow();
 
-                         myDataRow["شناسه کاربری"] = info.id;
-                         myDataRow["Name"] = info.properties.firstname + " " + info.properties.lastname;
+                         myDataRow["ID"] = info.id;
+                         myDataRow["Name"] = info.properties.firstname ;
                          myDataRow["MobileNum"] = info.properties.phone;
 
                          myDataRow["TotalRevenue"] = info.properties.total_revenue;
@@ -541,11 +532,13 @@ namespace PicoCRM.Core.Modules.Contact
 
                         custTable.Rows.Add(myDataRow);
                      }
-                     // Create a new DataSet
+                    // Create a new DataSet
+
+                 
+                    MessageBox.Show(custTable.Columns.Count.ToString());
 
 
-
-                     int p = 0;
+                    int p = 0;
 
                      int i = 0;
 
@@ -566,17 +559,19 @@ namespace PicoCRM.Core.Modules.Contact
 
                          .AddHeader("accept", "application/json")
 
-                         .AddQueryParameter("hapikey", "3ad5de2d-b2b7-450f-9396-8039cf878077")
+                         .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8")
 
                           .AddQueryParameter("properties", "phone")
+                         
                           .AddQueryParameter("properties","firstname")
-                         .AddQueryParameter("properties", "total_revenue")
+                        
+                          .AddQueryParameter("properties", "total_revenue")
 
                          .AddQueryParameter("archived", "false")
 
                          .AddParameter("after", after)
 
-                         .AddQueryParameter("limit", "100");
+                         .AddQueryParameter("limit", "10");
 
                          response = await client.GetAsync<ListContacts.Response>(request);
 
@@ -594,8 +589,8 @@ namespace PicoCRM.Core.Modules.Contact
 
                              myDataRow = custTable.NewRow();
 
-                             myDataRow["شناسه کاربری"] = info.id;
-                             myDataRow["Name"] = info.properties.firstname + " " + info.properties.lastname;
+                             myDataRow["ID"] = info.id;
+                             myDataRow["Name"] = info.properties.firstname ;
                              myDataRow["MobileNum"] = info.properties.phone;
                              myDataRow["TotalRevenue"] = info.properties.total_revenue;
                             

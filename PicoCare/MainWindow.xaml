@@ -8,46 +8,46 @@
     
         xmlns:SfDataGrid="clr-namespace:Syncfusion.Data;assembly=Syncfusion.Data.WPF"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="PicoCare.MainWindow"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+
+       
+    mc:Ignorable="d"
+        WindowStyle="None"
     
-        TextElement.FontWeight="Regular"
-    
-        TextElement.FontSize="13"
-   
-        TextOptions.TextFormattingMode="Ideal"
-     
-        TextOptions.TextRenderingMode="Auto"
-    
-        Background="{DynamicResource MaterialDesignPaper}"
-   
-        FontFamily="{DynamicResource MaterialDesignFont}"
-        mc:Ignorable="d"
-        WindowStyle="SingleBorderWindow"
         Title="MainWindow" Height="500" Width="700" >
     <Grid >
+        <syncfusion:SfNavigationDrawer x:Name="NavDrawer" ExpandedModeWidth="150" DisplayMode="Compact" FlowDirection="RightToLeft" Height="500"    Width="690" >
+            
+            
+            <syncfusion:NavigationItem x:Name="TabDashboard" Header="داشبورد" MouseDown="TabDashboard_MouseDown">
+                <syncfusion:NavigationItem.Icon>
+                    <materialDesign:PackIcon Kind="ViewDashboard" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+            <syncfusion:NavigationItem Name="TabContacts" Header="مخاطبین" MouseDown="TabContacts_MouseDown">
+                <syncfusion:NavigationItem.Icon>
+                    <materialDesign:PackIcon Kind="Contact" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+            <syncfusion:NavigationItem Header="معاملات" >
+                <syncfusion:NavigationItem.Icon>
+                    <materialDesign:PackIcon Kind="DealOutline" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </syncfusion:NavigationItem.Icon>
+            </syncfusion:NavigationItem>
+            <syncfusion:NavigationItem Header="تنظیمات" >
+                <syncfusion:NavigationItem.Icon>
+                    <materialDesign:PackIcon Kind="Settings" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </syncfusion:NavigationItem.Icon>
+                <syncfusion:NavigationItem Header="پیکربندی">
+                    <syncfusion:NavigationItem.Icon>
+                        <materialDesign:PackIcon x:Name="TabConfigurationSetting" Kind="UserSettings" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="TabConfigurationSetting_MouseDown" />
 
-        <TabControl Margin="0,0,0,58" FlowDirection="RightToLeft" FontFamily="B Yekan" Style="{DynamicResource MaterialDesignNavigatilRailTabControl}">
-            <TabItem Width="150" Header="ثبت سریع">
-                <Grid>
+                    </syncfusion:NavigationItem.Icon>
 
-                </Grid>
-            </TabItem>
-            <TabItem x:Name="TabContacts" Header="لیست مخاطبین" Width="150" MouseRightButtonDown="TabContacts_MouseRightButtonDown">
-                <syncfusion:SfDataGrid FontFamily="B Yekan" AutoGenerateColumns="True"  Name="dtCustomers" ItemsSource="{Binding}">
+                </syncfusion:NavigationItem>
+            </syncfusion:NavigationItem>
+        </syncfusion:SfNavigationDrawer>
 
-                </syncfusion:SfDataGrid>
-            </TabItem>
-            <TabItem x:Name="TabDeals" Header="لیست معاملات" Width="150"   MouseRightButtonDown="TabDeals_MouseRightButtonDown">
-                <syncfusion:SfDataGrid FontFamily="B Yekan" AutoGenerateColumns="True"  Name="dtDeals" ItemsSource="{Binding}">
 
-                </syncfusion:SfDataGrid>
-
-            </TabItem>
-            <TabItem x:Name="TabSetting" Header="تنظیمات" Width="100">
-
-            </TabItem>
-        </TabControl>
-        <materialDesign:Card Content="2022 PicoCare Build 11803"  FontFamily="B Yekan"  materialDesign:TextFieldAssist.LeadingIcon="Abc" HorizontalAlignment="Stretch" Height="48" VerticalAlignment="Center" Width="690" Margin="0,426,0,0" FontSize="20"/>
 
     </Grid>
 </Window>

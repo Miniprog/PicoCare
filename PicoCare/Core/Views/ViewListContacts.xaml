@@ -1,0 +1,21 @@
+﻿<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Name="ViewListContacts1"  x:Class="PicoCare.Core.Views.ViewListContacts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      
+        xmlns:local="clr-namespace:PicoCare.Core.Views"
+        WindowStyle="None"
+        mc:Ignorable="d"
+        Title="ViewListContacts" Height="450" Width="800" >
+   
+    <Grid x:Name="MainView" Loaded="MainView_Loaded">
+
+        <StackPanel >
+            <syncfusion:SfDataGrid AllowCollectionView="True" x:Name="dtContacts" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"  ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.IsDeferredScrollingEnabled="True" FlowDirection="RightToLeft"  AutoGenerateColumns="True" ItemsSource="{Binding}"  >
+                
+            </syncfusion:SfDataGrid>
+
+        </StackPanel>
+    </Grid>
+</Window>

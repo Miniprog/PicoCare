@@ -11,23 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Syncfusion.SfSkinManager;
 
-using Syncfusion.Licensing;
-namespace PicoCRM.Core.Pages.Dashboard
+namespace PicoCare.Core.Views
 {
     /// <summary>
-    /// Interaction logic for DashboardIndex.xaml
+    /// Interaction logic for ViewConfigurationSetting.xaml
     /// </summary>
-    public partial class DashboardIndex : Window
+    public partial class ViewConfigurationSetting : Window
     {
-        public DashboardIndex()
+        public ViewConfigurationSetting()
         {
             InitializeComponent();
-           
-            SyncfusionLicenseProvider.RegisterLicense("MTcwOUAzMTM5MmUzNDJlMzBXZjgrSERrT2MyRDRlZlpqRjQ4bWZYMEtLaXJDYXFGSzN1U3Q2TlFuUHVrPQ==");
-
-
+            MessageBox.Show("Test");
         }
     }
 }

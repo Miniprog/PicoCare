@@ -28,6 +28,7 @@ namespace PicoCRM.Core.Modules.Contact.Models
                     public string? lastname { get; set; }
                     public string? phone { get; set; }
                     public string? website { get; set; }
+                   
 
 
                 }

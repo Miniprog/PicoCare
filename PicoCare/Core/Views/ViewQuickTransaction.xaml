@@ -1,0 +1,46 @@
+﻿<Window x:Class="PicoCare.Core.Views.ViewQuickTransaction"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PicoCare.Core.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="ViewQuickTransaction" Height="450" Width="800">
+    <Grid x:Name="PlaceHolder">
+        
+        <materialDesign:Card Width="300" BorderThickness="2" >
+            <StackPanel>
+                <StackPanel x:Name="TabQuickHeader" Height="50" Background="{DynamicResource  MaterialDesignCardBackground}" >
+                    <Label Content="تراکنش جدید" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel x:Name="ControlHolder">
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cNatCode" materialDesign:HintAssist.Hint="کد ملی" FlowDirection="RightToLeft"/>
+
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True" x:Name="cName" materialDesign:HintAssist.Hint="نام و نام  خانوادگی" FlowDirection="RightToLeft"/>
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cPhoneNumber" materialDesign:HintAssist.Hint="تلفن همراه" FlowDirection="RightToLeft"/>
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cDealTitle" materialDesign:HintAssist.Hint="عنوان تراکنش" FlowDirection="RightToLeft"/>
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}"  materialDesign:HintAssist.IsFloating="True"  x:Name="cDealPrice" materialDesign:HintAssist.Hint="مبلغ تراکنش" FlowDirection="RightToLeft"/>
+
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cDealIPG" materialDesign:HintAssist.Hint="مبلغ خرید اینترنتی" FlowDirection="RightToLeft"/>
+                  
+
+
+                    <Button FontFamily="B Yekan" x:Name="BtnSubmit" Content="ثبت اطلاعات" Click="BtnSubmit_Click"/>
+
+
+
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+
+    </Grid>
+</Window>

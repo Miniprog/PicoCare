@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows10.0.22000.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>10.0.20348.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +18,11 @@
     <PackageReference Include="Syncfusion.Licensing" Version="19.4.0.56" />
     <PackageReference Include="Syncfusion.Pdf.Wpf" Version="19.4.0.56" />
     <PackageReference Include="Syncfusion.SfGrid.WPF" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.SfNavigationDrawer.WPF" Version="19.4.0.56" />
     <PackageReference Include="Syncfusion.SfSkinManager.WPF" Version="19.4.0.56" />
     <PackageReference Include="Syncfusion.Shared.WPF" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.Themes.FluentDark.WPF" Version="19.4.0.56" />
+    <PackageReference Include="Syncfusion.Themes.MaterialDark.WPF" Version="19.4.0.56" />
   </ItemGroup>
 
 </Project>
