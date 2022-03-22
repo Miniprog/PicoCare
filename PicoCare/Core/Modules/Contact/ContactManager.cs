@@ -1,6 +1,8 @@
 ﻿
 
 
+using System.Runtime.InteropServices;
+
 namespace PicoCRM.Core.Modules.Contact
 {
 
@@ -196,9 +198,11 @@ namespace PicoCRM.Core.Modules.Contact
          public class GetContact
          {
 
-             public async Task<string> GetId(string PhoneNumber  )
+             public async Task<string> GetId(string PhoneNumber , [Optional] string NatCode )
              {
-                 try
+
+                string Email = NatCode + "@PicoCrm.ir";
+                try
                  {
                      var options = new RestClientOptions($"https://api.hubapi.com/crm/v3/objects/contacts/search")
                      {
@@ -224,19 +228,21 @@ namespace PicoCRM.Core.Modules.Contact
 
                                     {
                                         propertyName = "phone",
-                                     
+
                                         value= PhoneNumber,
-                                       
+
                                         _operator ="EQ"
 
 
                                     }
+                                    
                                 }
                             }
                         },
                         
                         properties=  new  List<string>
                         { 
+
                          "phone",
                          "firstname",
 
@@ -394,7 +400,7 @@ namespace PicoCRM.Core.Modules.Contact
                            .AddQueryParameter("properties", "email")
                            .AddQueryParameter("properties", "createdAt")
                            .AddQueryParameter("properties", "updatedAt")
-
+                           .AddQueryParameter("properties", "fax")
                            .AddQueryParameter("hapikey", "3be549ee-d665-44c8-8a93-fdf83ae1fee8");
 
                 var response = await client.GetAsync<ActionGetContactInfo.ContactData>(request);

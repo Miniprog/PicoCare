@@ -23,15 +23,15 @@
                 </StackPanel>
 
                 <StackPanel x:Name="ControlHolder">
-                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cNatCode" materialDesign:HintAssist.Hint="کد ملی" FlowDirection="RightToLeft"/>
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cPhoneNumber" materialDesign:HintAssist.Hint="تلفن همراه" FlowDirection="RightToLeft" LostFocus="cPhoneNumber_LostFocus"/>
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cNatCode" materialDesign:HintAssist.Hint="کد ملی" FlowDirection="RightToLeft" LostFocus="cNatCode_LostFocus"/>
 
                     <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True" x:Name="cName" materialDesign:HintAssist.Hint="نام و نام  خانوادگی" FlowDirection="RightToLeft"/>
-                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cPhoneNumber" materialDesign:HintAssist.Hint="تلفن همراه" FlowDirection="RightToLeft"/>
                     <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cDealTitle" materialDesign:HintAssist.Hint="عنوان تراکنش" FlowDirection="RightToLeft"/>
-                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}"  materialDesign:HintAssist.IsFloating="True"  x:Name="cDealPrice" materialDesign:HintAssist.Hint="مبلغ تراکنش" FlowDirection="RightToLeft"/>
+                    <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}"  materialDesign:HintAssist.IsFloating="True"  x:Name="cDealPrice" materialDesign:HintAssist.Hint="مبلغ تراکنش" FlowDirection="RightToLeft" LostFocus="cDealPrice_LostFocus"/>
 
                     <TextBox FontFamily="B Yekan" Foreground="White" Style="{DynamicResource MaterialDesignTextBox}" materialDesign:HintAssist.IsFloating="True"  x:Name="cDealIPG" materialDesign:HintAssist.Hint="مبلغ خرید اینترنتی" FlowDirection="RightToLeft"/>
-                  
+
 
 
                     <Button FontFamily="B Yekan" x:Name="BtnSubmit" Content="ثبت اطلاعات" Click="BtnSubmit_Click"/>
@@ -39,6 +39,12 @@
 
 
                 </StackPanel>
+                <StackPanel Width="200" Margin="10,10,10,10" Height="50">
+                    <Label x:Name="WalletBalance" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="B Yekan" Content="موجودی کیف پول"  />
+                  
+
+                </StackPanel>
+                <Button x:Name="OnlinePayment" Content="پرداخت از کیف پول" FontFamily="B Morvarid" Visibility="Hidden" Click="OnlinePayment_Click"/>
             </StackPanel>
         </materialDesign:Card>
 

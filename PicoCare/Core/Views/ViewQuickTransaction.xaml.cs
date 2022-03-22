@@ -83,5 +83,81 @@ namespace PicoCare.Core.Views
             }
            
         }
+
+        private void cNatCode_LostFocus(object sender, RoutedEventArgs e)
+        {
+        
+        }
+
+        private async void cPhoneNumber_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ContactManager.GetContact contactManager = new ContactManager.GetContact();
+          
+            string ContactId =  await contactManager.GetId(cPhoneNumber.Text);
+
+            var ContactData = await contactManager.GetContactProp(ContactId);
+            if (ContactData.id != "0" )
+            {
+                try
+                {
+                    cNatCode.Text = new String(ContactData.properties.email.Where(Char.IsDigit).ToArray());
+                    cName.Text = ContactData.properties.firstname;
+                    WalletBalance.Content = $"{ContactData.properties.fax}:موجودی کیف پول  ";
+                   
+                }
+                catch (Exception ex)
+                {
+                    WalletBalance.Content = $"0:موجودی کیف پول  ";
+                    OnlinePayment.Visibility = Visibility.Hidden;
+                }
+
+            }
+            else
+            {
+
+            }
+            OnlinePayment.Visibility = Visibility.Hidden;
+
+        }
+
+        private async void OnlinePayment_Click(object sender, RoutedEventArgs e)
+        {
+            ContactManager.GetContact contactManager = new ContactManager.GetContact();
+            ContactManager.UpdateContact updateContact = new ContactManager.UpdateContact();
+            string ContactId = await contactManager.GetId(cPhoneNumber.Text);
+
+            var ContactData = await contactManager.GetContactProp(ContactId);
+
+            bool UpdateWallet = await updateContact.UpdateWallet(ContactId, long.Parse(cDealPrice.Text), false);
+
+            if (UpdateWallet)
+            {
+            
+                long WalletBalanceAmount = await   contactManager.GetWalletBalance(ContactId);
+                MessageBox.Show($"پرداخت اعتباری با موفقیت انجام گردید اعتبار فعلی :{WalletBalanceAmount}");
+            }
+            else
+            {
+                MessageBox.Show("پرداخت اعبتاری با خطا مواجه شد");
+            }
+           
+        }
+
+        private async void cDealPrice_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ContactManager.GetContact contactManager = new ContactManager.GetContact();
+            ContactManager.UpdateContact updateContact = new ContactManager.UpdateContact();
+            string ContactId = await contactManager.GetId(cPhoneNumber.Text);
+
+            var ContactData = await contactManager.GetContactProp(ContactId);
+            if (cDealPrice.Text == ContactData.properties.fax)
+            {
+                OnlinePayment.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                OnlinePayment.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
