@@ -58,7 +58,13 @@ namespace PicoCare.Core.Views
            await Sms.SendReportToAdmin(cName.Text, "09109740017", cDealPrice.Text, cDealTitle.Text,DayRevenue, "", DealId);
                          
                 
+           
             await Sms.SendReportToAdmin(cName.Text, "09150089472", cDealPrice.Text, cDealTitle.Text, DayRevenue, "", DealId);
+
+            ContactManager.GetContact GetWallet = new ContactManager.GetContact();
+         
+            long wb = await  GetWallet.GetWalletBalance(contactid);
+            await Sms.SendTranaction(cPhoneNumber.Text,cName.Text, cDealTitle.Text, (long.Parse(cDealPrice.Text) / 100 * 15).ToString(), wb.ToString(), DealId.ToString());
 
         }
         public string ToPersianDate(DateTime thisDate , bool Timeincluded)

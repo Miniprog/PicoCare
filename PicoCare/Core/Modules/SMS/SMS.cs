@@ -64,7 +64,7 @@ namespace PicoCRM.Core.Modules.SMS
             }
 
 
-            public async Task<string> SendTranaction(string Phone , string FullName, string DealTitle , string TotalDealAmount ,string IPG ,string ServicePrice, string DealDate , string DealStage , string DealId  )
+            public async Task<string> SendTranaction(string Phone , string FullName, string DealTitle , string DealScore ,string TotalScore , string TrackingCode  )
             {
                
                 PersianCalendar pc = new PersianCalendar();
@@ -85,23 +85,21 @@ namespace PicoCRM.Core.Modules.SMS
 
                 .AddQueryParameter("apikey", "yGSsWR4YZzwnE1gikCr6g6WrOQ0Fe0NJ3Kk494ZtHkI=")
 
-                .AddQueryParameter("pid", "yyxz8h4rfm")
+                .AddQueryParameter("pid", "2wtcae2kp5")
 
                 .AddQueryParameter("fnum", "3000505")
 
                 .AddQueryParameter("tnum", Phone)
 
-                .AddQueryParameter("p1", "fullname")
+                .AddQueryParameter("p1", "cName")
 
-                .AddQueryParameter("p2", "title")
+                .AddQueryParameter("p2", "cTitle")
 
-                .AddQueryParameter("p3", "TotalPayment")
-                .AddQueryParameter("p4", "IPG")
-                .AddQueryParameter("p5", "amount")
-                .AddQueryParameter("p6", "date")
+                .AddQueryParameter("p3", "InScore")
+               
+                .AddQueryParameter("p4", "totalScore")
 
-                .AddQueryParameter("p7", "stage")
-                .AddQueryParameter("p8", "id")
+                .AddQueryParameter("p5", "Id")
 
 
 
@@ -109,14 +107,10 @@ namespace PicoCRM.Core.Modules.SMS
 
                 .AddQueryParameter("v2", DealTitle)
 
-                .AddQueryParameter("v3", TotalDealAmount)
-                .AddQueryParameter("v4", IPG)
-                .AddQueryParameter("v5", ServicePrice)
-                .AddQueryParameter("v6", DealDate)
-                
-                .AddQueryParameter("v7", DealStage)
-                
-                .AddQueryParameter("v8",DealId);
+                .AddQueryParameter("v3", DealScore)
+                .AddQueryParameter("v4", TotalScore)
+                .AddQueryParameter("v5", TrackingCode);
+          
 
 
 
